@@ -1,0 +1,61 @@
+{
+  "url-base": "",
+  "wallpaper": "insideout.jpg",
+  "feelings": [
+    {
+      "feeling": "Angry",
+      "image": "angry.jpg",
+      "color": [
+        {
+          "R": 255,
+          "G": 0,
+          "B": 0
+        }
+      ]
+    },
+    {
+      "feeling": "Fear",
+      "image": "fear.jpg",
+      "color": [
+        {
+          "R": 255,
+          "G": 0,
+          "B": 255
+        }
+      ]
+    },
+    {
+      "feeling": "Sad",
+      "image": "sad.jpg",
+      "color": [
+        {
+          "R": 0,
+          "G": 0,
+          "B": 255
+        }
+      ]
+    },
+    {
+      "feeling": "Disgust",
+      "image": "disgust.jpg",
+      "color": [
+        {
+          "R": 0,
+          "G": 255,
+          "B": 0
+        }
+      ]
+    },
+    {
+      "feeling": "Joy",
+      "image": "joy.jpg",
+      "color": [
+        {
+          "R": 255,
+          "G": 192,
+          "B": 0
+        }
+      ]
+    }
+  ]
+}
