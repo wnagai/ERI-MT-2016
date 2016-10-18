@@ -1,3 +1,10 @@
+/*
+  Ball: one colorful ball
+  - Ball()            // constructor
+  - draw()            // draw the ball
+  - update()          // calculate next position of ball
+  - checkCollision()  // test if ball is coliding in screen frontiers
+*/
 class Ball {
   int x, y, 
     dirx, diry, 
@@ -10,8 +17,8 @@ class Ball {
     else
       this.size = width/16;
 
-    this.x = int(random(width/2)) + this.size;
-    this.y = int(random(height/2)) + this.size;
+    this.x = int(random(width/2) + width*0.25);
+    this.y = int(random(height/2) + height*0.25);
 
     this.dirx = this.diry = int(random(10)) + 1;
     this.c = color(random(255), random(255), random(255));

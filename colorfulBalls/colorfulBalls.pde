@@ -1,22 +1,28 @@
-Ball myBall[]; 
-int amount;
+/*
+  colorfulBalls
+  - show colorful balls in random position (x, y) in screen
+*/
+Ball []balls;   // array of many balls 
+int amount;      // how many balls ?
 
 void setup() 
 {
-  fullScreen();
-  amount = int(random(10)) + 1; 
-  myBall = new Ball[amount];
-  for (int i = 0; i < amount; i++)
-    myBall[i] = new Ball();
+  fullScreen();  // full screen 
+  
+  amount = int(random(10)) + 1;  // random number of balls
+  balls = new Ball[amount];     // array of amount balls
+  for (int i = 0; i < amount; i++)  // instance each ball in balls
+    balls[i] = new Ball();
 }
 
 void draw() 
 {
-  background(0);
-  fill(255);
-  for (int i = 0; i < amount; i++) {
-    myBall[i].update();
-    myBall[i].checkCollision();
-    myBall[i].draw();
+  background(0);  // background color is black
+  
+  // for each ball in balls, draw ball with any color
+  for(Ball ball : balls) {
+    ball.update();
+    ball.checkCollision();
+    ball.draw();
   }
-}
+}  
