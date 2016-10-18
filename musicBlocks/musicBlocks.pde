@@ -1,7 +1,11 @@
-//import processing.sound.*;    // uncomment for Processing
-import cassette.audiofiles.SoundFile;  // cassette library for Android mp3 sounds
+/*
+  musicBlocks
+  - play many sounds when user touchs/clicks in the screen
+*/
+import processing.sound.*;             // library sound of Processing
+//import cassette.audiofiles.SoundFile;  // cassette library for Android mp3 sounds
 
-SoundFile file[];
+SoundFile []file;
 
 void setup()
 {
