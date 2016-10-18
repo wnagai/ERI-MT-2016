@@ -4,7 +4,7 @@ int amount;
 void setup() 
 {
   fullScreen();
-  amount = int(random(100)) + 1; 
+  amount = int(random(10)) + 1; 
   myBall = new Ball[amount];
   for (int i = 0; i < amount; i++)
     myBall[i] = new Ball();

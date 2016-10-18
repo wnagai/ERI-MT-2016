@@ -26,9 +26,11 @@ class Ball {
     this.x += this.dirx; 
     this.y += this.diry;
   }
-  
+
   void checkCollision() {
-    if (this.x < size/2 || this.x > width-size/2) this.dirx *= -1;
-    if (this.y < size/2 || this.y > height-size/2) this.diry *= -1;
+    if (this.x < size/2 || this.x > width-size/2) 
+      this.dirx *= -1;
+    if (this.y < size/2 || this.y > height-size/2) 
+      this.diry *= -1;
   }
 }
