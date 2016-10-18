@@ -18,6 +18,6 @@ class Gun
   {
     noStroke();
     fill(255);
-    rect(loc.x, loc.y, 12, 12);
+    rect(loc.x, loc.y, 8, 2);
   }
 }
