@@ -7,20 +7,20 @@ String []feelings;
 JSONObject insideOutJSON;
 JSONArray feelingsArray;
 PImage []images;
-PImage wallpaper;
+//PImage wallpaper;
 
 void setup()
 {
-  size(960, 600);
-  //fullScreen();
+  //size(960, 600);
+  fullScreen();
 
   insideOutJSON = loadJSONObject("insideOut.json");
 
   String urlBase;
   urlBase = insideOutJSON.getString("url-base");
 
-  wallpaper = loadImage(urlBase + insideOutJSON.getString("wallpaper"));
-  wallpaper.resize(width, height);
+  //wallpaper = loadImage(urlBase + insideOutJSON.getString("wallpaper"));
+  //wallpaper.resize(width, height);
 
   feelingsArray = insideOutJSON.getJSONArray("feelings");
   feelings = new String[feelingsArray.size()];
@@ -35,7 +35,7 @@ void setup()
       colorsArray.getJSONObject(0).getInt("B"));
   }
 
-  numClicks = 5;
+  numClicks = 10;
   imageWidth = width / feelingsArray.size();
   imageHeight = height / feelingsArray.size();
   squareSize = (width - imageWidth)/numClicks;
@@ -49,7 +49,7 @@ void setup()
   noStroke();
 }
 
-void mouseClicked()
+void mousePressed()
 {
   int idx = whichImage(mouseX, mouseY);
   if (idx >= 0) {
@@ -64,7 +64,8 @@ void mouseClicked()
 
 void draw()
 {
-  background(wallpaper);
+  //background(wallpaper);
+  background(0);
 
   if (!isFinished) {
     for (int i = 0; i < feelingsArray.size(); i++) {
@@ -73,7 +74,7 @@ void draw()
       rect(imageWidth, i*imageHeight, squareSize*frequencies[i], imageHeight);
     }
   } else {
-    wallpaper.filter(GRAY);
+    //wallpaper.filter(GRAY);
     int textSize = height / 10;
     fill(colors[mood]);
     textSize(textSize);

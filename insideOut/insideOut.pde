@@ -9,7 +9,6 @@ int imageWidth, imageHeight, squareSize, numClicks;
 void setup()
 {
   fullScreen();
-  orientation(LANDSCAPE);
 
   feelings = new String[5];
   feelings[0] = new String("Angry");
