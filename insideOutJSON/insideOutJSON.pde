@@ -1,38 +1,28 @@
-int mood = -1;
-int []frequencies;
 int imageWidth, imageHeight, squareSize, numClicks;
-color []colors;
+int mood = -1;
 boolean isFinished = false;
-String []feelings;
+String urlBase;
+
 JSONObject insideOutJSON;
 JSONArray feelingsArray;
-PImage []images;
-//PImage wallpaper;
+Feeling []feelings;
 
 void setup()
 {
-  //size(960, 600);
   fullScreen();
 
   insideOutJSON = loadJSONObject("insideOut.json");
-
-  String urlBase;
   urlBase = insideOutJSON.getString("url-base");
-
-  //wallpaper = loadImage(urlBase + insideOutJSON.getString("wallpaper"));
-  //wallpaper.resize(width, height);
-
   feelingsArray = insideOutJSON.getJSONArray("feelings");
-  feelings = new String[feelingsArray.size()];
-  images = new PImage[feelingsArray.size()];
-  colors = new color[feelingsArray.size()];
+
+  feelings = new Feeling[feelingsArray.size()];
   for (int i = 0; i < feelingsArray.size(); i++) {
-    feelings[i] = feelingsArray.getJSONObject(i).getString("feeling");
-    images[i] = loadImage(feelingsArray.getJSONObject(i).getString("image"));
     JSONArray colorsArray = feelingsArray.getJSONObject(i).getJSONArray("color");
-    colors[i] = color(colorsArray.getJSONObject(0).getInt("R"), 
+    feelings[i] = new Feeling(feelingsArray.getJSONObject(i).getString("feeling"), 
+      loadImage(feelingsArray.getJSONObject(i).getString("image")), 
+      color(colorsArray.getJSONObject(0).getInt("R"), 
       colorsArray.getJSONObject(0).getInt("G"), 
-      colorsArray.getJSONObject(0).getInt("B"));
+      colorsArray.getJSONObject(0).getInt("B")));
   }
 
   numClicks = 10;
@@ -40,11 +30,8 @@ void setup()
   imageHeight = height / feelingsArray.size();
   squareSize = (width - imageWidth)/numClicks;
 
-  frequencies = new int[feelingsArray.size()];
-  for (int i = 0; i < feelingsArray.size(); i++) {
-    images[i].resize(imageWidth, imageHeight);
-    frequencies[i] = 0;
-  }
+  for (int i = 0; i < feelingsArray.size(); i++)
+    feelings[i].resize(imageWidth, imageHeight);
 
   noStroke();
 }
@@ -53,8 +40,8 @@ void mousePressed()
 {
   int idx = whichImage(mouseX, mouseY);
   if (idx >= 0) {
-    if (frequencies[idx] < numClicks)
-      frequencies[idx]++;
+    if (feelings[idx].frequency < numClicks)
+      feelings[idx].frequency++;
     else {
       isFinished = true;
       mood = idx;
@@ -64,21 +51,19 @@ void mousePressed()
 
 void draw()
 {
-  //background(wallpaper);
   background(0);
-
-  if (!isFinished) {
-    for (int i = 0; i < feelingsArray.size(); i++) {
-      image(images[i], 0, images[i].height * i);
-      fill(colors[i]);
-      rect(imageWidth, i*imageHeight, squareSize*frequencies[i], imageHeight);
+  if (!isFinished) 
+  {
+    for (int i = 0; i < feelings.length; i++) {
+      image(feelings[i].image, 0, feelings[i].image.height * i);
+      fill(feelings[i].c);
+      rect(imageWidth, i*imageHeight, squareSize*feelings[i].frequency, imageHeight);
     }
   } else {
-    //wallpaper.filter(GRAY);
     int textSize = height / 10;
-    fill(colors[mood]);
+    fill(feelings[mood].c);
     textSize(textSize);
-    text(feelings[mood], (width - textWidth(feelings[mood]))/2, height/2 - textSize/2);
+    text(feelings[mood].feeling, (width - textWidth(feelings[mood].feeling))/2, height/2 - textSize/2);
     text("wins!!", (width - textWidth("wins!!"))/2, height / 2 + textSize/2);
   }
 }
