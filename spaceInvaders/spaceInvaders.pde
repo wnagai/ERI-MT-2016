@@ -22,10 +22,10 @@ void setup()
 
   for (int i = 0; i < (wallRight-wallLeft)/96; i++)
     enemies.add(new Enemy(i*96 + wallLeft, 16, "s-l64-17.jpg"));
-  for (int i = 0; i < 6; i++)
-    enemies.add(new Enemy(i*96 + wallLeft + 32, 80, "s-l64-15.jpg"));
-  for (int i = 0; i < 6; i++)
-    enemies.add(new Enemy(i*96 + wallLeft, 144, "s-l64-24.jpg"));
+  for (int i = 0; i < (wallRight-wallLeft)/96; i++)
+    enemies.add(new Enemy(i*96 + wallLeft + 16, 80, "s-l64-15.jpg"));
+  for (int i = 0; i < (wallRight-wallLeft)/96; i++)
+    enemies.add(new Enemy(i*96 + wallLeft + 32, 144, "s-l64-24.jpg"));
 }
 
 void mousePressed()
@@ -35,7 +35,7 @@ void mousePressed()
   else if (mouseX < wallLeft)
     ship.turnLeft();
   else {
-    guns.add(new Gun(ship.loc.x - 4, ship.loc.y-2));
+    guns.add(new Gun(ship.loc.x - 4, ship.loc.y));
     shoot.play();
   }
 }
@@ -44,35 +44,45 @@ void draw()
 {
   background(0);
 
+  // for each enemy (alien)
   for (Enemy enemy : enemies)
   {
+    // if alien position (x, y) is near of left or right wall
+    // invert the right movement to left movement
     if (enemy.loc.x > wallRight - enemy.img.width/2 ||
       enemy.loc.x < wallLeft + enemy.img.width/2) {
-      for (int j = 0; j < enemies.size(); j++) {
-        Enemy e = enemies.get(j);
+      for (Enemy e : enemies)
         e.invert();
-      }
     }
-    enemy.update();
-    if (enemy.isVisible()) {
-      enemy.display();
-    }
+    // for each gun update it location
     for (Gun oneGun : guns) {
       oneGun.update();
-      if (oneGun.isVisible())
+      // if gun is not explode, display it
+      if (!oneGun.isExplode())
         oneGun.display();
-
+      // if gun shoot any alien (x, y), enemy is dead and explode
       if (oneGun.loc.y <= enemy.loc.y && 
         oneGun.loc.x >= enemy.loc.x && 
         oneGun.loc.x <= enemy.loc.x) {
+        // explode enemy
         enemy.dead();
+        // explode gun
         oneGun.explode();
       }
     }
+    // update aliens
+    enemy.update();
+    // if enemy is alive
+    if (!enemy.isDead())
+      enemy.display();
   }
+  // test each enemy if takeout the spaceship, exploding it
   for (Enemy e : enemies) {
-    if (!ship.explode(e) && e.isVisible()) {
+    // if enemy not explode the ship and enemy is not dead
+    if (!e.explode(ship) && !e.isDead()) {
+      // update the spaceship location
       ship.update(wallLeft, wallRight);
+      // show the spaceship
       ship.display();
     }
   }

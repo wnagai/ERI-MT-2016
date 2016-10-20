@@ -4,7 +4,7 @@ class SpaceShip
   PImage img;
   int dir;
   boolean visible;
-  
+
   SpaceShip()
   {
     this.img = loadImage("s-l64-2.jpg");
@@ -23,7 +23,7 @@ class SpaceShip
   {
     this.loc.x += this.dir;
     if (this.loc.x < wl + this.img.width/2 + 16 || 
-        this.loc.x > wr - this.img.width/2 - 16)
+      this.loc.x > wr - this.img.width/2 - 16)
       this.dir = 0;
   }
 
@@ -32,7 +32,7 @@ class SpaceShip
     if (this.dir < 0)
       this.dir *= -1;
     if (this.dir == 0)
-      this.dir = 2;
+      this.dir = 1;
   }
 
   void turnLeft()
@@ -40,15 +40,6 @@ class SpaceShip
     if (this.dir > 0)
       this.dir *= -1;
     if (this.dir == 0)
-      this.dir = -2;
-  }
-  
-  boolean explode(Enemy e)
-  {
-    if(e.loc.x >= this.loc.x - this.img.width/2 &&
-       e.loc.x <= this.loc.x + this.img.width/2 &&
-       e.loc.y >= this.loc.y - this.img.height/2)
-       this.visible = false;
-     return !this.visible;
+      this.dir = -1;
   }
 }

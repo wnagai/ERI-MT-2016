@@ -9,7 +9,7 @@ class Enemy
   {
     img = loadImage(filename);
     loc = new PVector(x + img.width/2, y + img.height/2);
-    dir = 2;
+    dir = 1;
     step = 1;
     visible = true;
   }
@@ -43,8 +43,18 @@ class Enemy
     this.visible = false;
   }
 
-  boolean isVisible()
+  boolean isDead()
   {
-    return this.visible;
+    return !this.visible;
+  }
+
+  boolean explode(SpaceShip ss)
+  {
+    if (loc.y >= ss.loc.y && 
+      loc.x >= ss.loc.x - ss.img.width/2 &&
+      loc.x <= ss.loc.x + ss.img.width/2) {
+      this.visible = false;
+    }
+    return !this.visible;
   }
 }

@@ -7,7 +7,7 @@ class Gun
   Gun(float x, float y)
   {
     loc = new PVector(x, y);
-    dir = 1;
+    dir = 2;
     visible = true;
   }
   
@@ -29,8 +29,8 @@ class Gun
     this.visible = false;
   }
   
-  boolean isVisible()
+  boolean isExplode()
   {
-    return this.visible;
+    return !this.visible;
   }
 }
