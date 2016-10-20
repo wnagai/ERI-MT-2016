@@ -10,7 +10,6 @@ SoundFile shoot;
 void setup()
 {
   fullScreen();
-  //size(800,600);
 
   shoot = new SoundFile(this, "shoot.mp3");
 
@@ -23,11 +22,10 @@ void setup()
 
   for (int i = 0; i < (wallRight-wallLeft)/96; i++)
     enemies.add(new Enemy(i*96 + wallLeft, 16, "s-l64-17.jpg"));
-  //  for (int i = 0; i < 6; i++)
-  //    enemies.add(new Enemy(i*96 + wallLeft + 32, 80, "s-l64-15.jpg"));
-  //  for (int i = 0; i < 6; i++)
-  //    enemies.add(new Enemy(i*96 + wallLeft, 144, "s-l64-24.jpg"));
-  frameRate(10);
+  for (int i = 0; i < 6; i++)
+    enemies.add(new Enemy(i*96 + wallLeft + 32, 80, "s-l64-15.jpg"));
+  for (int i = 0; i < 6; i++)
+    enemies.add(new Enemy(i*96 + wallLeft, 144, "s-l64-24.jpg"));
 }
 
 void mousePressed()
@@ -45,8 +43,9 @@ void mousePressed()
 void draw()
 {
   background(0);
-  for (int i = 0; i < enemies.size(); i++) {
-    Enemy enemy = enemies.get(i);
+
+  for (Enemy enemy : enemies)
+  {
     if (enemy.loc.x > wallRight - enemy.img.width/2 ||
       enemy.loc.x < wallLeft + enemy.img.width/2) {
       for (int j = 0; j < enemies.size(); j++) {
@@ -54,20 +53,27 @@ void draw()
         e.invert();
       }
     }
-    for (int j = 0; j < guns.size(); j++) {
-      Gun oneGun = guns.get(j);
-      oneGun.update();
-      oneGun.display();
-      if (oneGun.loc.y <= enemy.loc.y)
-      {
-        enemy.visible = false;
-      }
-    }
+    enemy.update();
     if (enemy.isVisible()) {
-      enemy.update();
       enemy.display();
     }
-  } 
-  ship.update(wallLeft, wallRight);
-  ship.display();
+    for (Gun oneGun : guns) {
+      oneGun.update();
+      if (oneGun.isVisible())
+        oneGun.display();
+
+      if (oneGun.loc.y <= enemy.loc.y && 
+        oneGun.loc.x >= enemy.loc.x && 
+        oneGun.loc.x <= enemy.loc.x) {
+        enemy.dead();
+        oneGun.explode();
+      }
+    }
+  }
+  for (Enemy e : enemies) {
+    if (!ship.explode(e) && e.isVisible()) {
+      ship.update(wallLeft, wallRight);
+      ship.display();
+    }
+  }
 }

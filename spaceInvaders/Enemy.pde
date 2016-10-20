@@ -16,35 +16,35 @@ class Enemy
 
   void display()
   {
-    if(visible) {
+    if (this.visible) {
       imageMode(CENTER);
-      image(img, loc.x, loc.y); 
+      image(this.img, loc.x, loc.y);
     }
   }
 
   void update()
   {
-    loc.x += dir;
+    this.loc.x += dir;
   }
-  
+
   void invert()
   {
-    if (step < 16) {
-      dir *= -1;
-      loc.y += img.height/4;
-      step++;
+    if (this.step < 24) {
+      this.dir *= -1;
+      this.loc.y += this.img.height/4;
+      this.step++;
     } else {
-      dir = 0;
+      this.dir = 0;
     }
   }
-  
+
   void dead()
   {
-    visible = false;
+    this.visible = false;
   }
-  
+
   boolean isVisible()
   {
-    return visible;
+    return this.visible;
   }
 }

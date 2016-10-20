@@ -2,11 +2,13 @@ class Gun
 {
   PVector loc;
   int dir;
+  boolean visible;
   
   Gun(float x, float y)
   {
     loc = new PVector(x, y);
-    dir = 8;
+    dir = 1;
+    visible = true;
   }
   
   void update()
@@ -17,7 +19,18 @@ class Gun
   void display()
   {
     noStroke();
+    rectMode(CENTER);
     fill(255);
-    rect(loc.x, loc.y, 8, 2);
+    rect(loc.x + 4, loc.y, 6, 6);
+  }
+  
+  void explode()
+  {
+    this.visible = false;
+  }
+  
+  boolean isVisible()
+  {
+    return this.visible;
   }
 }
