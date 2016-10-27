@@ -9,7 +9,8 @@ SoundFile shoot;
 
 void setup()
 {
-  fullScreen();
+  //fullScreen();
+  size(400, 480);
 
   shoot = new SoundFile(this, "shoot.mp3");
 
