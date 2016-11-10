@@ -2,16 +2,17 @@ class Enemy
 {
   PVector loc;
   PImage img;
-  int dir, step;
+  int dir, step, points;
   boolean visible;
 
-  Enemy(float x, float y, String filename)
+  Enemy(float x, float y, String filename, int points)
   {
-    img = loadImage(filename);
-    loc = new PVector(x + img.width/2, y + img.height/2);
-    dir = 1;
-    step = 1;
-    visible = true;
+    this.img  = loadImage(filename);
+    this.loc  = new PVector(x + img.width/2, y + img.height/2);
+    this.dir  = 1;
+    this.step = 1;
+    this.points = points;
+    this.visible = true;
   }
 
   void display()
@@ -38,9 +39,11 @@ class Enemy
     }
   }
 
-  void dead()
+  int dead()
   {
     this.visible = false;
+    
+    return points;
   }
 
   boolean isDead()
@@ -50,9 +53,9 @@ class Enemy
 
   boolean explode(SpaceShip ss)
   {
-    if (loc.y >= ss.loc.y && 
-      loc.x >= ss.loc.x - ss.img.width/2 &&
-      loc.x <= ss.loc.x + ss.img.width/2) {
+    if (this.loc.y >= ss.loc.y && 
+      this.loc.x >= ss.loc.x - ss.img.width/2 &&
+      this.loc.x <= ss.loc.x + ss.img.width/2) {
       this.visible = false;
     }
     return !this.visible;

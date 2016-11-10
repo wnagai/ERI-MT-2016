@@ -2,6 +2,7 @@ import processing.sound.*;
 //import cassette.audiofiles.SoundFile;
 
 SpaceShip ship;
+Scoreboard score;
 ArrayList<Gun> guns;
 ArrayList<Enemy> enemies;
 int wallLeft, wallRight;
@@ -9,8 +10,9 @@ SoundFile shoot;
 
 void setup()
 {
-  //fullScreen();
-  size(400, 480);
+  fullScreen();
+
+  score = new Scoreboard();
 
   shoot = new SoundFile(this, "shoot.mp3");
 
@@ -22,11 +24,11 @@ void setup()
   wallRight = int(width*0.75);
 
   for (int i = 0; i < (wallRight-wallLeft)/96; i++)
-    enemies.add(new Enemy(i*96 + wallLeft, 16, "s-l64-17.jpg"));
+    enemies.add(new Enemy(i*96 + wallLeft, 16, "s-l64-17.jpg", 1));
   for (int i = 0; i < (wallRight-wallLeft)/96; i++)
-    enemies.add(new Enemy(i*96 + wallLeft + 16, 80, "s-l64-15.jpg"));
+    enemies.add(new Enemy(i*96 + wallLeft + 16, 80, "s-l64-15.jpg", 5));
   for (int i = 0; i < (wallRight-wallLeft)/96; i++)
-    enemies.add(new Enemy(i*96 + wallLeft + 32, 144, "s-l64-24.jpg"));
+    enemies.add(new Enemy(i*96 + wallLeft + 32, 144, "s-l64-24.jpg", 7));
 }
 
 void mousePressed()
@@ -66,7 +68,8 @@ void draw()
         oneGun.loc.x >= enemy.loc.x && 
         oneGun.loc.x <= enemy.loc.x) {
         // explode enemy
-        enemy.dead();
+        if (!enemy.isDead())
+          score.add(enemy.dead());
         // explode gun
         oneGun.explode();
       }
@@ -87,4 +90,5 @@ void draw()
       ship.display();
     }
   }
+  score.display();
 }
