@@ -36,11 +36,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.action_settings:
+                fragment = new Blank();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+
+        return true;
     }
 }
