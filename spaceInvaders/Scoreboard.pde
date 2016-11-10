@@ -15,7 +15,7 @@ class Scoreboard
   {
     PFont font;
     
-    font = createFont("Arial", 28);
+    font = createFont("sans-serif", 28);
     textFont(font);
     text("Score: " + score, 10, 30);
   }
