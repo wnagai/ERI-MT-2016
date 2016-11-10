@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">FragExample</string>
-    <string name="action_settings">Configurações</string>
+
+    <string name="action_colorfulballs">Bolas coloridas</string>
+
+    <string name="action_blank">Em branco</string>
 </resources>

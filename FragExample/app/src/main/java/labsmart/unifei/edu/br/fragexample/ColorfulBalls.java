@@ -5,16 +5,14 @@ import processing.core.PApplet;
 public class ColorfulBalls extends PApplet {
 
     Ball balls[];
-    int amount;
 
     public void settings() {
         size(displayWidth, displayHeight);
     }
 
     public void setup() {
-        amount = PApplet.parseInt(random(10)) + 1;
-        balls = new Ball[amount];
-        for (int i = 0; i < amount; i++)
+        balls = new Ball[PApplet.parseInt(random(10)) + 1];
+        for (int i = 0; i < balls.length; i++)
             balls[i] = new Ball();
     }
 

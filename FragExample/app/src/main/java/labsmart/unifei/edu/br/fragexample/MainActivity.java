@@ -18,12 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = new ColorfulBalls();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
     }
 
     @Override
@@ -35,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment;
+
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_blank:
                 fragment = new Blank();
+                break;
+            case R.id.action_colorfulballs:
+                fragment = new ColorfulBalls();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
