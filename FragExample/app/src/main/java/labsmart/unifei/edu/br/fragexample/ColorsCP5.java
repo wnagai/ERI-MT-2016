@@ -9,7 +9,7 @@ import processing.core.PApplet;
  * Created by walter on 10/11/16.
  */
 
-public class Blank extends PApplet {
+public class ColorsCP5 extends PApplet {
 
     ControlP5 cp5;
     Button []buttons;

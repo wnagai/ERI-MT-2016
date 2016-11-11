@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_blank:
-                fragment = new Blank();
+                fragment = new ColorsCP5();
                 break;
             case R.id.action_colorfulballs:
                 fragment = new ColorfulBalls();
