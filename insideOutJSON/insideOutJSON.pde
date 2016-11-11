@@ -2,7 +2,6 @@ int imageWidth, imageHeight, squareSize, numClicks;
 int mood = -1;
 boolean isFinished = false;
 String urlBase;
-
 JSONObject insideOutJSON;
 JSONArray feelingsArray;
 Feeling []feelings;
@@ -11,7 +10,7 @@ void setup()
 {
   fullScreen();
 
-  insideOutJSON = loadJSONObject("insideOut.json");
+  insideOutJSON = loadJSONObject("https://raw.githubusercontent.com/wnagai/ERI-MT-2016/master/insideOutJSON/data/insideOut.json");
   urlBase = insideOutJSON.getString("url-base");
   feelingsArray = insideOutJSON.getJSONArray("feelings");
 
