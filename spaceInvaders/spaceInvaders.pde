@@ -14,6 +14,7 @@ void setup()
   //orientation(LANDSCAPE);
 
   fullScreen();
+  //size(640, 480);
 
   numEnemiesShooted = 0;
 
@@ -50,6 +51,23 @@ void mousePressed()
     }
   } else {
     game_status = 1;
+  }
+}
+
+void keyPressed()
+{
+  if (game_status == 0)
+    game_status = 1;
+  else {
+    if (key == CODED) {
+      if (keyCode == LEFT)
+        ship.turnLeft();
+      else if (keyCode == RIGHT)
+        ship.turnRight();
+    } else if (key == ' ') {
+      guns.add(new Gun(ship.loc.x - 4, ship.loc.y));
+      shoot.play();
+    }
   }
 }
 
