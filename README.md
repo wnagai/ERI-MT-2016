@@ -1,6 +1,6 @@
 # ERI-MT-2016
 
-Repositório de códigos em Processing e Java desenvolvidos pelo prof. Walter A. Nagai para o minicurso "Usando Processing para desenvolvimento de aplicativos Android" para o ERI-MT-2016 e CompSulMT'2016.
+Repositório de códigos em Processing e Java desenvolvidos pelo prof. Walter A. Nagai para o minicurso "Usando Processing para desenvolvimento de aplicativos Android" para o ERI-MT-2016 e CompSulMT'2016. A apresentação do minicurso está disponível no arquivo "minicurso_apresentacao.pdf".
 
 ## Processing
 
